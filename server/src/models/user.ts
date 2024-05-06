@@ -52,7 +52,7 @@ const UserSchema: Schema = new Schema({
   tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
 });
 
-UserSchema.pre<TaskInterface>("find", function (next) {
+UserSchema.pre<UserI>("find", function (next) {
   this.populate("tasks");
   next();
 });

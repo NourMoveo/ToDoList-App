@@ -38,6 +38,22 @@ class UserService extends GenericService<UserI> {
       throw new Error("Error logging in");
     }
   }
+
+  async getTasks(query: string): Promise<TaskInterface[]> {
+    try {
+      let tasks: TaskInterface[];
+
+      if (query.toLowerCase() === "all") {
+        tasks = await Task.find();
+      } else {
+        tasks = await Task.find({ category: query });
+      }
+      return tasks;
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+      throw new Error("Error fetching tasks");
+    }
+  }
 }
 
 export default UserService;
